@@ -50,7 +50,8 @@ const getPlants = async (req=Request, res=Response) => {
                     "country_id": {
                         "type": "INTEGER"
                     }
-                }
+                },
+                "query" : "findAll"
             }); 
     
             let response = await config.getDBResponse(data)
