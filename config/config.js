@@ -11,7 +11,6 @@ const getDBResponse = async (data) => {
     };
 
     let response = await axios(config)
-
     return response.data;
 
 }
