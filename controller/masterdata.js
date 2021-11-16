@@ -19,7 +19,8 @@ const getCountries = async (req=Request, res=Response) => {
                 "country_coordinates_longitude": {
                     "type": "DOUBLE"
                 }
-            }
+            },
+            "query" : "findAll"
         }); 
 
         let response = await config.getDBResponse(data)
