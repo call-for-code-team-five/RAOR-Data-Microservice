@@ -19,7 +19,8 @@ const getCountries = async (req=Request, res=Response) => {
                 "country_coordinates_longitude": {
                     "type": "DOUBLE"
                 }
-            }
+            },
+            "query" : "findAll"
         }); 
 
         let response = await config.getDBResponse(data)
@@ -30,11 +31,69 @@ const getCountries = async (req=Request, res=Response) => {
     }
 }
 
-const getPlants = () => {
+const getPlants = async (req=Request, res=Response) => {
+        try {
+            var data = JSON.stringify({
+                "tablename": "master_plant",
+                "tabledefinition": {
+                    "plant_id": {
+                        "type": "INTEGER"
+                    },
+                    "plant_name": {
+                        "type": "STRING"
+                    },
+                    "plant_coordinates_latitude": {
+                        "type": "DOUBLE"
+                    },
+                    "plant_coordinates_longitude": {
+                        "type": "DOUBLE"
+                    },
+                    "country_id": {
+                        "type": "INTEGER"
+                    }
+                },
+                "query" : "findAll"
+            }); 
+    
+            let response = await config.getDBResponse(data)
+            res.send(response)
+            
+        } catch (e) {
+            console.log(e)
+    }
 
 }
 
-const getAssets = () => {
+const getAssets  = async (req=Request, res=Response) => {
+    try {
+        var data = JSON.stringify({
+            "tablename": "master_assets",
+            "tabledefinition": {
+                "asset_id": {
+                    "type": "INTEGER"
+                },
+                "asset_name": {
+                    "type": "STRING"
+                },
+                "asset_coordinates_latitude": {
+                    "type": "DOUBLE"
+                },
+                "asset_coordinates_longitude": {
+                    "type": "DOUBLE"
+                },
+                "plant_id": {
+                    "type": "INTEGER"
+                }
+            }
+        }); 
+
+        let response = await config.getDBResponse(data)
+        res.send(response)
+        
+    } catch (e) {
+        console.log(e)
+}
+
 
 }
 

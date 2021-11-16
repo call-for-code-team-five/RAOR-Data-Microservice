@@ -11,16 +11,16 @@ const getDBResponse = async (data) => {
     };
 
     let response = await axios(config)
-
     return response.data;
 
 }
 
-const getObjectStoreResponse = async () => {
+const getObjectStoreResponse = async (data) => {
     var config = {
-        method: 'get',
+        method: 'post',
         url: process.env.CONFIGSERVICEURL + '/getObjectStoreConfiguration',
-        headers: {}
+        headers: {},
+        data: data
     };
 
     let response = await axios(config)
