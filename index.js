@@ -44,11 +44,11 @@ app.get("/protected_resource", passport.authenticate(WebAppStrategy.STRATEGY_NAM
     res.json(req.user); 
 });
 
-app.get('/', (req, res) => {
+app.get('/', passport.authenticate(WebAppStrategy.STRATEGY_NAME), (req, res) => {
     res.send("Main Data Microservice is running")
 })
 
-app.use("/api", routes);
+app.use("/api", passport.authenticate(WebAppStrategy.STRATEGY_NAME), routes);
 
 app.listen(port, () => {
     console.log('Main Data Microservice is running in', port)
