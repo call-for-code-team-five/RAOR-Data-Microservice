@@ -14,7 +14,7 @@ const CALLBACK_URL = "/ibm/cloud/appid/callback";
 const helmet = require("helmet")
 
 // app.use(cors());
-
+consloe.log("STRATEGY_NAME", WebAppStrategy.STRATEGY_NAME)
 app.use(cors.corsfilters);
 app.use(helmet())
 
@@ -30,7 +30,7 @@ if (process.env.ENVIRONMENT != "LOCAL") {
 
   app.use(passport.initialize());
   app.use(passport.session());
-  app.use(passport.authenticate("JWT", {
+  app.use(passport.authenticate(WebAppStrategy.STRATEGY_NAME, {
 
     session: false
 
