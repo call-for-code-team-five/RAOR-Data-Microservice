@@ -30,11 +30,11 @@ if (process.env.ENVIRONMENT != "LOCAL") {
 
     app.use(passport.initialize());
     app.use(passport.session());
-    app.use(passport.authenticate(WebAppStrategy.STRATEGY_NAME, {
+    // app.use(passport.authenticate(WebAppStrategy.STRATEGY_NAME, {
 
-        session: false
+    //     session: false
 
-    }));
+    // }));
 
     passport.use(
         new WebAppStrategy({
