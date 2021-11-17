@@ -14,7 +14,7 @@ const CALLBACK_URL = "/ibm/cloud/appid/callback";
 const helmet = require("helmet")
 
 // app.use(cors());
-consloe.log("STRATEGY_NAME", WebAppStrategy.STRATEGY_NAME)
+console.log("STRATEGY_NAME", WebAppStrategy.STRATEGY_NAME)
 app.use(cors.corsfilters);
 app.use(helmet())
 
