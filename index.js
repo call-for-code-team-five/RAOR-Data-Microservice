@@ -19,17 +19,19 @@ app.use(cors.corsfilters);
 app.use(helmet())
 
 if (process.env.ENVIRONMENT != "LOCAL") {
-    console.log("deployed")
-    app.use(
-        session({
-            secret: "123456",
-            resave: true,
-            saveUninitialized: true,
-        })
-    );
 
-    app.use(passport.initialize());
-    app.use(passport.session());
+    console.log("deployed")
+
+    // app.use(
+    //     session({
+    //         secret: "123456",
+    //         resave: true,
+    //         saveUninitialized: true,
+    //     })
+    // );
+
+    // app.use(passport.initialize());
+    // app.use(passport.session());
     // app.use(passport.authenticate(WebAppStrategy.STRATEGY_NAME, {
 
     //     session: false
@@ -49,33 +51,38 @@ if (process.env.ENVIRONMENT != "LOCAL") {
         })
     );
 
-    passport.serializeUser(function (user, cb) {
-        cb(null, user);
-    });
+    // passport.serializeUser(function (user, cb) {
+    //     cb(null, user);
+    // });
 
-    passport.deserializeUser(function (obj, cb) {
-        cb(null, obj);
-    });
+    // passport.deserializeUser(function (obj, cb) {
+    //     cb(null, obj);
+    // });
 
-    app.get(CALLBACK_URL, passport.authenticate(WebAppStrategy.STRATEGY_NAME));
+    app.get("/auth/login", passport.authenticate(WebAppStrategy.STRATEGY_NAME, { successRedirect: SUCCESS_REDIRECT_URL, forceLogin: true }));
 
-    app.get(
-        "/protected_resource",
-        passport.authenticate(WebAppStrategy.STRATEGY_NAME),
-        (req, res) => {
-            res.json(req.user);
-        }
-    );
+    app.get(CALLBACK_URL, passport.authenticate(WebAppStrategy.STRATEGY_NAME), { allowAnonymousLogin: true });
 
-    app.get(
-        "/",
-        passport.authenticate(WebAppStrategy.STRATEGY_NAME, {allowAnonymousLogin: true}),
-        (req, res) => {
-            res.send("Main Data Microservice is running");
-        }
-    );
+    // app.get(
+    //     "/protected_resource",
+    //     passport.authenticate(WebAppStrategy.STRATEGY_NAME),
+    //     (req, res) => {
+    //         res.json(req.user);
+    //     }
+    // );
+
+    // app.get(
+    //     "/",
+    //     passport.authenticate(WebAppStrategy.STRATEGY_NAME, { allowAnonymousLogin: true }),
+    //     (req, res) => {
+    //         res.send("Main Data Microservice is running");
+    //     }
+    // );
+
     app.use("/api", passport.authenticate(WebAppStrategy.STRATEGY_NAME), routes);
+
 } else {
+
     console.log("local")
     app.get("/", (req, res) => {
         res.send("Main Data Microservice is running");
