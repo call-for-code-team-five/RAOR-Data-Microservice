@@ -29,8 +29,8 @@ if (process.env.ENVIRONMENT != "LOCAL") {
         oauthServerUrl: "https://eu-gb.appid.cloud.ibm.com/oauth/v4/44516919-34fa-4e47-a1de-9e0462e11af4"
     }));
 
-    app.use("/api", passport.authenticate(APIStrategy.STRATEGY_NAME, { session: false}), routes);
-    
+    // app.use("/api", passport.authenticate(APIStrategy.STRATEGY_NAME, { session: false}), routes);
+     app.use("/api", routes);
 
 } else {
 
